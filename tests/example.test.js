@@ -81,4 +81,25 @@ describe('My first puppeter test', () => {
 			await page.close()
 		}
 	})
+	it('Should simulate the keypress Enter', async () => {
+		const browser = await puppeteer.launch({
+			headless: false,
+			slowMo: 10,
+			devtools: false,
+		})
+		const page = await browser.newPage()
+		let pages = await browser.pages()
+		await pages[0].close()
+		try {
+			await page.goto('https://google.com')
+			await page.waitForSelector('.RNNXgb')
+			await page.type('.RNNXgb', 'Que onda hoomies')
+			await page.keyboard.press('Enter', { delay: 10 })
+			await page.waitFor(5000)
+		} catch (error) {
+			console.error(error)
+		} finally {
+			await page.close()
+		}
+	})
 })
