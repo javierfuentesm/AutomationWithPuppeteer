@@ -1,0 +1,17 @@
+{
+  "name": "puppeteerautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --timeout=30000 ./tests"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.2.0",
+    "prettier": "^2.0.5",
+    "puppeteer": "^3.3.0"
+  }
+}
