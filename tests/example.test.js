@@ -92,10 +92,16 @@ describe('My first puppeter test', () => {
 		await pages[0].close()
 		try {
 			await page.goto('https://google.com')
+			//Full XPath
+			await page.waitForXPath('/html/body/div/div[3]/form/div[2]/div[1]/div[1]/div/div[2]/input')
+			//Xpath
+			await page.waitForXPath('//*[@id="tsf"]/div[2]/div[1]/div[1]/div/div[2]/input')
+			// Clase de un elemento mas arriba
 			await page.waitForSelector('.RNNXgb')
+
 			await page.type('.RNNXgb', 'Que onda hoomies')
 			await page.keyboard.press('Enter', { delay: 10 })
-			await page.waitFor(5000)
+			await page.waitFor(2000)
 		} catch (error) {
 			console.error(error)
 		} finally {
