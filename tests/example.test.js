@@ -49,7 +49,7 @@ describe('My first puppeter test', () => {
 			await page.close()
 		}
 	})
-	it('Should get the title and the url', async () => {
+	it('Should get the title and the url and get the text and count the <p>', async () => {
 		const browser = await puppeteer.launch({
 			headless: true,
 			slowMo: 10,
@@ -63,8 +63,9 @@ describe('My first puppeter test', () => {
 			const title = await page.title()
 			const url = await page.url()
 			const text = await page.$eval('h1', e => e.textContent)
-			console.log(text)
-			console.log(`Titulo ${title} y url ${url}`)
+			const count = await page.$$eval('p', e => e.length)
+			console.log(count)
+			console.log(`Titulo ${title} y url ${url} texto: ${text} , count: ${count}`)
 		} catch (error) {
 			console.error(error)
 		} finally {
