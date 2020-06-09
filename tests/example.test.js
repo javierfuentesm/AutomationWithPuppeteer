@@ -51,7 +51,7 @@ describe('My first puppeter test', () => {
 	})
 	it('Should get the title and the url', async () => {
 		const browser = await puppeteer.launch({
-			headless: false,
+			headless: true,
 			slowMo: 10,
 			devtools: false,
 		})
@@ -62,7 +62,8 @@ describe('My first puppeter test', () => {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			const title = await page.title()
 			const url = await page.url()
-			await page.waitFor(5000)
+			const text = await page.$eval('h1', e => e.textContent)
+			console.log(text)
 			console.log(`Titulo ${title} y url ${url}`)
 		} catch (error) {
 			console.error(error)
