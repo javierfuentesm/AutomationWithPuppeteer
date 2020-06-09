@@ -130,7 +130,7 @@ describe('My first puppeter test', () => {
 
 			await page.type('.RNNXgb', 'Que onda hoomies')
 			await page.keyboard.press('Enter', { delay: 10 })
-			//Validate document doesnt exist you can get this selector from googlw chrome devtools
+			//Validate document doesnt exist you can get this selector from google chrome devtools
 			await page.waitFor(
 				() =>
 					!document.querySelector(
