@@ -8,6 +8,9 @@ describe('My first puppeter test', () => {
 			devtools: false,
 		})
 		const page = await browser.newPage()
+		let pages = await browser.pages()
+		await pages[0].close()
+
 		try {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			await page.type('#developer-name', 'Javier', { delay: 0 })
@@ -16,9 +19,9 @@ describe('My first puppeter test', () => {
 			await page.waitFor(2000)
 			await page.click('#tried-test-cafe', { clickCount: 1, delay: 0 })
 			await page.waitFor(5000)
-			await page.close()
 		} catch (error) {
 			console.error(error)
+		} finally {
 			await page.close()
 		}
 	})
@@ -29,6 +32,8 @@ describe('My first puppeter test', () => {
 			devtools: false,
 		})
 		const page = await browser.newPage()
+		let pages = await browser.pages()
+		await pages[0].close()
 		try {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			await page.type('#developer-name', 'Javier', { delay: 0 })
@@ -38,9 +43,9 @@ describe('My first puppeter test', () => {
 			await page.type('#comments', 'Un texto de prueba ')
 			await page.click('#submit-button')
 			await page.waitFor(5000)
-			await page.close()
 		} catch (error) {
 			console.error(error)
+		} finally {
 			await page.close()
 		}
 	})
