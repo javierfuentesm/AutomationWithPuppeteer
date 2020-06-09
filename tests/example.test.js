@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const expect = require('chai').expect
 
 describe('My first puppeter test', () => {
 	it('Should  fill th input and click the checkbox ', async () => {
@@ -49,7 +50,7 @@ describe('My first puppeter test', () => {
 			await page.close()
 		}
 	})
-	it('Should get the title and the url and get the text and count the <p>', async () => {
+	it('Should get the title and the url and get the text and count the p', async () => {
 		const browser = await puppeteer.launch({
 			headless: true,
 			slowMo: 10,
@@ -64,8 +65,14 @@ describe('My first puppeter test', () => {
 			const url = await page.url()
 			const text = await page.$eval('h1', e => e.textContent)
 			const count = await page.$$eval('p', e => e.length)
-			console.log(count)
-			console.log(`Titulo ${title} y url ${url} texto: ${text} , count: ${count}`)
+
+			console.log(
+				`Titulo ${title} y url ${url} texto: ${text} , count: ${count}`
+			)
+			expect(title).to.be.a('string', 'TestCafe Example Page')
+			expect(url).to.include('devexpress')
+			expect(text).to.be.a('string', 'Example')
+			expect(count).to.equal(9)
 		} catch (error) {
 			console.error(error)
 		} finally {
