@@ -57,6 +57,8 @@ describe('My first puppeter test', () => {
 			devtools: false,
 		})
 		const page = await browser.newPage()
+		await page.setDefaultTimeout(10000)
+		await page.setDefaultNavigationTimeout(20000)
 		let pages = await browser.pages()
 		await pages[0].close()
 		try {
