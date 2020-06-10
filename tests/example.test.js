@@ -2,16 +2,22 @@ const puppeteer = require('puppeteer')
 const expect = require('chai').expect
 
 describe('My first puppeter test', () => {
-	it('Should  fill th input and click the checkbox ', async () => {
-		const browser = await puppeteer.launch({
+	let browser, page, pages
+	before(async () => {
+		browser = await puppeteer.launch({
 			headless: false,
 			slowMo: 10,
 			devtools: false,
 		})
-		const page = await browser.newPage()
-		let pages = await browser.pages()
+		page = await browser.newPage()
+		pages = await browser.pages()
 		await pages[0].close()
+	})
+	after(async () => {})
+	beforeEach(async () => {})
+	afterEach(async () => {})
 
+	it('Should  fill th input and click the checkbox ', async () => {
 		try {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			await page.type('#developer-name', 'Javier', { delay: 0 })
@@ -27,14 +33,6 @@ describe('My first puppeter test', () => {
 		}
 	})
 	it('Should select an option of the dropdown and write the text in the textarea and  click on the submit', async () => {
-		const browser = await puppeteer.launch({
-			headless: false,
-			slowMo: 10,
-			devtools: false,
-		})
-		const page = await browser.newPage()
-		let pages = await browser.pages()
-		await pages[0].close()
 		try {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			await page.type('#developer-name', 'Javier', { delay: 0 })
@@ -51,16 +49,6 @@ describe('My first puppeter test', () => {
 		}
 	})
 	it('Should get the title and the url and get the text and count the p', async () => {
-		const browser = await puppeteer.launch({
-			headless: true,
-			slowMo: 10,
-			devtools: false,
-		})
-		const page = await browser.newPage()
-		await page.setDefaultTimeout(10000)
-		await page.setDefaultNavigationTimeout(20000)
-		let pages = await browser.pages()
-		await pages[0].close()
 		try {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			const title = await page.title()
@@ -82,14 +70,6 @@ describe('My first puppeter test', () => {
 		}
 	})
 	it('Should simulate the keypress Enter', async () => {
-		const browser = await puppeteer.launch({
-			headless: false,
-			slowMo: 10,
-			devtools: false,
-		})
-		const page = await browser.newPage()
-		let pages = await browser.pages()
-		await pages[0].close()
 		try {
 			await page.goto('https://google.com')
 			//Full XPath
@@ -113,14 +93,6 @@ describe('My first puppeter test', () => {
 		}
 	})
 	it('Should validate if the button  doesnt exist', async () => {
-		const browser = await puppeteer.launch({
-			headless: false,
-			slowMo: 10,
-			devtools: false,
-		})
-		const page = await browser.newPage()
-		let pages = await browser.pages()
-		await pages[0].close()
 		try {
 			await page.goto('https://google.com')
 			//Full XPath
