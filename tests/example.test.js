@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer')
 const expect = require('chai').expect
+const { click, getCount, getText } = require('../lib/helpers')
 
 describe('My first puppeter test', () => {
 	let browser, page, pages
@@ -21,10 +22,13 @@ describe('My first puppeter test', () => {
 		try {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			await page.type('#developer-name', 'Javier', { delay: 0 })
+			await click(page, '#tried-test-cafe')
 			await page.waitFor(2000)
+			await click(page, '#tried-test-cafe')
+			/*
 			await page.click('#tried-test-cafe', { clickCount: 1, delay: 0 })
 			await page.waitFor(2000)
-			await page.click('#tried-test-cafe', { clickCount: 1, delay: 0 })
+			await page.click('#tried-test-cafe', { clickCount: 1, delay: 0 })*/
 			await page.waitFor(5000)
 		} catch (error) {
 			console.error(error)
@@ -53,8 +57,10 @@ describe('My first puppeter test', () => {
 			await page.goto('https://devexpress.github.io/testcafe/example/')
 			const title = await page.title()
 			const url = await page.url()
-			const text = await page.$eval('h1', e => e.textContent)
-			const count = await page.$$eval('p', e => e.length)
+			//const text = await page.$eval('h1', e => e.textContent)
+			const text = await getText(page, 'h1')
+			//const count = await page.$$eval('p', e => e.length)
+			const count = await getCount(page, 'p')
 
 			console.log(
 				`Titulo ${title} y url ${url} texto: ${text} , count: ${count}`
