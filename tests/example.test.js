@@ -1,6 +1,13 @@
 const puppeteer = require('puppeteer')
 const expect = require('chai').expect
-const { click, getCount, getText } = require('../lib/helpers')
+const {
+	click,
+	getCount,
+	getText,
+	waitForText,
+	shouldNotExist,
+	typeText,
+} = require('../lib/helpers')
 
 describe('My first puppeter test', () => {
 	let browser, page, pages
@@ -102,23 +109,43 @@ describe('My first puppeter test', () => {
 		try {
 			await page.goto('https://google.com')
 			//Full XPath
-			await page.waitForXPath(
+			/*	await page.waitForXPath(
 				'/html/body/div/div[3]/form/div[2]/div[1]/div[1]/div/div[2]/input'
 			)
+			await page.type('.RNNXgb', 'Que onda hoomies')*/
 
-			await page.type('.RNNXgb', 'Que onda hoomies')
+			//Asi funciona cuando queires escribir en un xpath
+			await typeText(
+				page,
+				'/html/body/div/div[3]/form/div[2]/div[1]/div[1]/div/div[2]/input',
+				'Que onda hoomies',
+				true
+			)
+			//Asi funiona cuando queires escribir en un selector
+			await typeText(page, '.RNNXgb', 'Que onda hoomies')
+
 			await page.keyboard.press('Enter', { delay: 10 })
+			await page.waitFor(2000)
 			//Validate document doesnt exist you can get this selector from google chrome devtools
-			await page.waitFor(
+			/*			await page.waitFor(
 				() =>
 					!document.querySelector(
 						'#tsf > div:nth-child(2) > div.A8SBwf.emcav > div.RNNXgb > div > div.a4bIc > input'
 					)
+			)*/
+			await shouldNotExist(
+				page,
+				'#tsf > div:nth-child(2) > div.A8SBwf.emcav > div.RNNXgb > div > div.a4bIc > input'
 			)
 			//Validate that the element doesnt exist  with the waitforselector/waitforxpath
-			await page.waitForXPath(
+			/*			await page.waitForXPath(
 				'/html/body/div/div[3]/form/div[2]/div[1]/div[1]/div/div[2]/input',
 				{ hidden: true, timeout: 3000 }
+			)*/
+			await shouldNotExist(
+				page,
+				'/html/body/div/div[3]/form/div[2]/div[1]/div[1]/div/div[2]/input',
+				true
 			)
 
 			await page.waitFor(2000)
