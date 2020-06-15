@@ -114,14 +114,14 @@ describe('My first puppeter test', () => {
 			)
 			await page.type('.RNNXgb', 'Que onda hoomies')*/
 
-			//Asi funciona cuando queires escribir en un xpath
+			//Asi funciona cuando quieres escribir en un xpath
 			await typeText(
 				page,
 				'/html/body/div/div[3]/form/div[2]/div[1]/div[1]/div/div[2]/input',
 				'Que onda hoomies',
 				true
 			)
-			//Asi funiona cuando queires escribir en un selector
+			//Asi funiona cuando quieres escribir en un selector
 			await typeText(page, '.RNNXgb', 'Que onda hoomies')
 
 			await page.keyboard.press('Enter', { delay: 10 })
